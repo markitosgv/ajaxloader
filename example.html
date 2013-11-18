@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>Ajaxloader 1.5.1</title>
+
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+<link href="ajaxloader/ajaxloader.css" type="text/css" rel="stylesheet" />
+
+<script src="jquery.ajaxloader.1.5.1.js" type="text/javascript"></script>
+
+</head>
+<script type="text/javascript">
+
+$(function(){
+    $('#some-button').click(function(){
+            $('#some-content').ajaxloader();
+            $('#some-content').load('load.html');
+    });
+    
+    $('#show-button').click(function(){
+         $('#some-content').ajaxloader();
+    });
+    
+    $('#show-other-button').click(function(){
+         $('#some-content').ajaxloader('show','tata-ajax-loader-img2');
+    });
+    
+    
+    $('#hide-button').click(function(){
+         $('#some-content').ajaxloader('hide');
+    });
+    $('#disable-button').click(function(){
+         $('#some-content').ajaxloader('disable');
+    });
+    
+    $('#show-button-fade').click(function(){
+         $('#some-content').ajaxloader('show',{fade:true, fadespeed: 'fast'});
+    });
+    
+    $('#hide-button-fade').click(function(){
+         $('#some-content').ajaxloader('hide',{fade:true, fadespeed: 'fast'});
+    });
+
+    $('#some-button-fade').click(function(){
+         $('#some-content').ajaxloader('show',{   
+                fade:true, 
+                fadespeed: 'slow', 
+                fadecallback: function(){
+                        $('#some-content').load('load.html');
+                        }
+                }
+         );
+    });
+    $('#some-button-fade-inout').click(function(){
+        $('#some-content').ajaxloader('load',{load:'load.html', fadespeed: 'slow'});
+    });
+    
+    
+    
+    $('#localframe').ajaxloader('page1.html');
+    
+    $('#load-page1').click(function(){
+        $('#localframestatus').html('load-page1');
+        $('#localframe').ajaxloader('page1.html');
+    });
+    $('#load-page2').click(function(){
+        $('#localframestatus').html('load-page2');
+        $('#localframe').ajaxloader('page2.html');
+    });
+    $('#load-page3').click(function(){
+        $('#localframestatus').html('load-page3');
+        $('#localframe').ajaxloader('load',{load:'page3.html', fadespeed: 'slow', loadcallback: function(){ 
+                    $('#localframestatus').html('load-page3 loadcallback');
+				
+                },
+				readycallback: function(){ 
+                    $('#localframestatus').html('load-page3 readycallback');
+				
+                }
+				});
+    });
+
+
+});
+
+
+
+
+</script>
+<style type="text/css">
+
+
+div.innercontent{
+    background-color: #15a;
+    text-align: center;
+    color: #fff;
+    padding: 20px 20px;
+}
+
+h1{
+    background-color: #9c3;
+    width: 100%;
+    padding: 20px 0px;
+    color: #fff;
+    margin: 0 0;
+    
+
+}
+
+body, html {
+    margin: 0 0;
+    padding: 0 0;
+}
+
+</style>
+
+<body>
+<h1><div style="padding: 0px 20px;">Ajaxloader 1.5.1<div style="float: right; font-size: 10pt;">
+part of <a href="http://sourceforge.net/projects/cms-tata/" style="color: #fff;">CMS Tata</a></div></div></h1>
+<div style="padding: 0px 20px;">
+<h2>Ajaxloader jquery plugin for show preload image on dynamic loading content </h2>
+<p>
+Ajaxloader plugin for jquery.
+<p style="font-family: monospace;">
+ * Copyright (c) 2010 Blokhin Yuriy (ds@inbox.ru)<br/>
+ * Dual licensed under the MIT and GPL licenses:<br/>
+ * http://www.opensource.org/licenses/mit-license.php<br/>
+ * http://www.gnu.org/licenses/gpl.html<br/>
+</p>
+</p>
+
+<h2>Examples 1:</h2>
+<button id='load-page1'>Load page 1</button>
+<button id='load-page2'>Load page 2</button>
+<button id='load-page3'>Load page 3</button>
+<br/>
+<br/>
+<div id="localframe"></div>
+<div id="localframestatus"></div>
+<p><b>Example 1 code:</b></p>
+<p style="font-family: monospace; background-color:#f0f0f0;">
+<br/>
+&emsp;&emsp;Button1 -  <b>$('#localframe').ajaxloader('page1.html');</b><br/>
+&emsp;&emsp;Button2 -  <b>$('#localframe').ajaxloader('page2.html');</b><br/>
+&emsp;&emsp;Button3 -  <b>$('#localframe').ajaxloader('load',{load:'page3.html', fadespeed: 'slow', loadcallback: function(){ <br/>
+&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;   $('#localframestatus').html('load-page3 loadcallback');<br/>
+&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;},<br/>
+&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;readycallback: function(){ <br/>
+&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;$('#localframestatus').html('load-page3 readycallback');<br/>
+&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;}<br/>
+&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;                }});</b><br/>
+<br/>
+</p>
+
+
+<h2>Using:</h2><br/>
+<p>
+Easy using for show preload image.<br/><br/>
+Link javascript and stylesheet file:
+<p style="font-family: monospace;">
+&lt;link href="ajaxloader/ajaxloader.css" type="text/css" rel="stylesheet" /&gt;<br/>
+&lt;script src="jquery.ajaxloader.js" type="text/javascript">&lt;/script&gt;</p>
+And just call method for some content:<br/>
+<p style="font-family: monospace;">$('#some-content').ajaxloader()</p>
+If you need other preload image, you can generated on site http://preloaders.net or others.
+</p>
+<p><b>Parameters:</b></p>
+<p style="font-family: monospace; background-color:#f0f0f0;">
+&emsp;   .ajaxloader(mode, options);<br/>
+&emsp;   <br/>
+&emsp;&emsp;    mode: <br/>       
+&emsp;&emsp;&emsp;        'show' <i> - show preload image</i><br/>&emsp;&emsp;&emsp;&emsp;&emsp;or<br/>
+&emsp;&emsp;&emsp;        'hide','enable' <i>- hide preload image(enable content)</i><br/>&emsp;&emsp;&emsp;&emsp;&emsp;or<br/>
+&emsp;&emsp;&emsp;        'disable' <i>- disable content</i>
+&emsp;&emsp;&emsp;        'load' <i>- load content with fade by default</i><br/>       
+&emsp;&emsp;               or <br/>       
+&emsp;&emsp;               'link to page' <i>- load page in content with fade by default  (.ajaxloader('page.html');)</i>
+<br/><br/>
+&emsp;&emsp;    options:<br/>
+&emsp;&emsp;&emsp;        'tata-ajax-loader-img' <i>- class of preload image ( .tata-ajax-loader-img { background-image: url('ajax-loader.gif');}  ) </i><br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;or<br/>
+&emsp;&emsp;&emsp;    options = { <br/>
+&emsp;&emsp;&emsp;&emsp;            class : 'tata-ajax-loader-img',&emsp;&emsp; <i> - class of preload image</i><br/>
+&emsp;&emsp;&emsp;&emsp;            fade:   false,&emsp;&emsp;  <i> - fade enable</i><br/>
+&emsp;&emsp;&emsp;&emsp;            fadespeed:   'fast'&emsp;&emsp; <i>-fade speed</i><br/>
+&emsp;&emsp;&emsp;&emsp;            fadecallback:   function(){}&emsp;&emsp; <i>-callback function for load</i><br/>
+&emsp;&emsp;&emsp;&emsp;            load: null <i> - load with fade inout</i><br/>
+&emsp;&emsp;&emsp;&emsp;            loadcallback: null<i> - callback function (load complete)</i><br/>
+&emsp;&emsp;&emsp;&emsp;            opacity: 80 <i>- opacity front preloadimage</i><br/>
+&emsp;&emsp;&emsp;        }<br/>
+
+</p>
+
+
+
+
+<h2>Examples 2:</h2>
+<button id='show-button'>Show preload images</button>
+<button id='show-other-button'>Show other preload images</button>
+<button id='hide-button'>Hide preload images (Enable)</button>
+<button id='disable-button'>Disable content</button>
+<button id='some-button'>Load content</button>
+<br/>
+<br/>
+<button id='show-button-fade'>Show with fade preload images</button>
+<button id='hide-button-fade'>Hide with fade preload images</button>
+<button id='some-button-fade'>Load content with fade</button>
+<br/>
+<br/>
+<button id='some-button-fade-inout'>Load content with fade IN and OUT</button>
+<br/>
+<br/>
+<div id='some-content'>
+    <div class='innercontent'>
+    This place some content for reloading<br/>
+    Ajaxloader can work with any tag: p,div e.t.c
+    All content disabled if show preload images    <button>Button for test</button>
+    </div>
+</div>
+
+
+<h2>Example 2 code:</h2>
+<p style="font-family: monospace; background-color:#f0f0f0;">
+
+&lt;script type="text/javascript"&gt;
+$(function(){<br/>
+&emsp;$('#some-button').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader();<br/>
+ &emsp;&emsp;$.load('load.html');<br/>
+&emsp;});<br/>
+&emsp;$('#show-button').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader();<br/>
+&emsp;});<br/>
+&emsp;$('#show-other-button').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader('show','tata-ajax-loader-img2');<br/>
+&emsp;});<br/>
+&emsp;$('#hide-button').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader('hide');<br/>
+&emsp;});<br/>
+&emsp;$('#disable-button').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader('disable');<br/>
+&emsp;});<br/>
+&emsp;$('#show-button-fade').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader('show',{fade:true, fadespeed: 'fast'});<br/>
+&emsp;});<br/>
+&emsp;$('#hide-button-fade').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader('hide',{fade:true, fadespeed: 'fast'});<br/>
+&emsp;});<br/>
+&emsp;$('#some-button-fade').click(function(){<br/>
+&emsp;&emsp;$('#some-content').ajaxloader('show',{<br/>   
+&emsp;&emsp;&emsp;fade:true,<br/> 
+&emsp;&emsp;&emsp;fadespeed: 'slow',<br/> 
+&emsp;&emsp;&emsp;fadecallback: function(){<br/>
+&emsp;&emsp;&emsp;&emsp;$('#some-content').load('load.html');<br/>
+&emsp;&emsp;&emsp;&emsp;}<br/>
+&emsp;&emsp;&emsp;}<br/>
+&emsp;&emsp;);<br/>
+&emsp;});<br/>
+
+});<br/>
+&lt;/script&gt;<br/><br/>
+&lt;button id='show-button'&gt;Show preload images&lt;/button&gt; <br/>
+&lt;button id='hide-button'&gt;Hide preload images&lt;/button&gt; <br/>
+&lt;button id='some-button'&gt;Load content&lt;/button&gt; <br/>
+&lt;button id='disable-button'&gt;Disable&lt;/button&gt; <br/>
+<br/><br/>
+&lt;button id='show-button-fade'&gt;Show with fade preload images&lt;/button&gt;<br/>
+&lt;button id='hide-button-fade'&gt;Hide with fade preload images&lt;/button&gt;<br/>
+&lt;button id='some-button-fade'&gt;Load content with fade&lt;/button&gt;<br/>
+<br/>
+&lt;div id='some-content'&gt;<br/>
+&emsp;&emsp;This place some content for reloading&lt;br/&gt; <br/>
+&emsp;&emsp;Ajaxloader can work with any tag: p,div e.t.c <br/>
+&emsp;&emsp;All content disabled if show preload images   <br/>
+&emsp;&emsp;&lt;button&gt;Button for test&lt;/button&gt;<br/>
+
+&lt;/div&gt;
+</p>
+
+<b>History log:</b>
+<p>
+    1.4 Add option in parameters <br/>
+    1.4 Add minimized file to pack<br/>
+    1.4 Rename class to imageclass parameters<br/>
+    1.4 Fix opacity problem in IE6+<br/>
+    1.4.1 Add simple `disable` without animation<br/>
+    1.4.2 Add option for callback fadein/out function <br/>
+    1.4.2 Add simple example with fade use <br/>
+    1.4.2 Add simple example with fade in out loading content <br/>
+    1.5.0 Add options 'load' <br/>
+	1.5.1 Add event 'readycallback' - call after load (simulate document ready for loaded page) <br/>
+	1.5.1 Add event 'loadcallback' <br/>
+	1.5.1 Tested on IE 9.0.8112.16421 (jQuery 1.7.1)<br/>
+</p>
+
+<h2>Downloads:</h2><br/>
+<a href="jquery.ajaxloader.1.5.1.js">Download jquery.ajaxloader.1.5.1.js version 1.5.1</a><br/><br/>
+<address>Copyright(c) 2011 Blokhin Yuriy (ds@inbox.ru)<br/></address> 
+</div>
+</body>
+</html>
