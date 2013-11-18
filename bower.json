@@ -22,9 +22,10 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "*.html*"
   ],
-  "dependencies": {
-    "jquery": "2.0.3"
-  }
+  "dependencies": [
+    "jquery": "latest"
+  ]
 }
