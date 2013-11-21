@@ -23,7 +23,7 @@ $('#some-content').ajaxloader()
 If you need other preload image, you can generated on site [http://preloaders.net or others](http://preloaders.net or others).
 
 Example code:
-```javascript
+```html
 <script type="text/javascript"> 
 $(function(){
     $('#some-button').click(function(){
