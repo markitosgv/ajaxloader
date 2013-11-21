@@ -9,32 +9,39 @@ Ajaxloader plugin for jquery.
 Easy using for show preload image.
 
 Link javascript and stylesheet file:
-
-    <link href="ajaxloader/ajaxloader.css" type="text/css" rel="stylesheet" />
-    <script src="jquery.ajaxloader.js" type="text/javascript"></script>
+```html
+<link href="ajaxloader/ajaxloader.css" type="text/css" rel="stylesheet" />
+<script src="jquery.ajaxloader.js" type="text/javascript"></script>
+```
     
 And just call method for some content:
 
-    $('#some-content').ajaxloader()
+```javascript
+$('#some-content').ajaxloader()
+```
     
 If you need other preload image, you can generated on site [http://preloaders.net or others](http://preloaders.net or others).
 
 Example code:
-```
-<script type="text/javascript"> $(function(){
- $('#some-button').click(function(){
-  $('#some-content').ajaxloader();
-  $.load('load.html');
- });
- $('#show-button').click(function(){
-  $('#some-content').ajaxloader();
- });
- $('#hide-button').click(function(){
-  $('#some-content').ajaxloader('hide');
- });
+```javascript
+<script type="text/javascript"> 
+$(function(){
+    $('#some-button').click(function(){
+        $('#some-content').ajaxloader();
+        $.load('load.html');
+    });
+    
+    $('#show-button').click(function(){
+        $('#some-content').ajaxloader();
+    });
+    
+    $('#hide-button').click(function(){
+        $('#some-content').ajaxloader('hide');
+    });
 });
 </script>
-
+```
+```html
 <button id='show-button'>Show preload images</button>
 <button id='hide-button'>Hide preload images</button>
 <button id='some-button'>Load content</button>
